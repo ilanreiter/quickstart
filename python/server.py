@@ -5,6 +5,8 @@ import os
 import datetime as dt
 import json
 import time
+import pandas as pd
+import json 
 
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
@@ -298,6 +300,8 @@ def get_transactions():
 
         # Return the 8 most recent transactions
         latest_transactions = sorted(added, key=lambda t: t['date'])[-8:]
+        with open('transactions.json', 'w') as file:
+            json.dump(jsonify({'latest_transactions': latest_transactions}), file)
         return jsonify({
             'latest_transactions': latest_transactions})
 
