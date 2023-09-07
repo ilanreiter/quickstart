@@ -302,8 +302,7 @@ def get_transactions():
         latest_transactions = sorted(added, key=lambda t: t['date'])[-8:]
         with open('transactions.json', 'w') as file:
             json.dump(jsonify({'latest_transactions': latest_transactions}), file)
-        return jsonify({
-            'latest_transactions': latest_transactions})
+        return jsonify({'latest_transactions': latest_transactions})
 
     except plaid.ApiException as e:
         error_response = format_error(e)
